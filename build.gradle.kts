@@ -7,7 +7,7 @@ plugins {
   kotlin("jvm") version "1.8.10"
   kotlin("plugin.serialization") version "1.8.10"
   java
-  id("net.neoforged.gradle") version "[6.0.13, 6.2)"
+  id("net.minecraftforge.gradle") version "6.+"
   id("com.github.johnrengelman.shadow") version "7.1.2"
   id("com.modrinth.minotaur") version "2.+"
 }
@@ -22,14 +22,14 @@ val ponder_version: String by project
 version = mod_version
 group = maven_group
 
-val archives_version = "$mod_version+mc$minecraft_version-neoforge"
+val archives_version = "$mod_version+mc$minecraft_version-forge"
 
 repositories {
   mavenCentral()
   maven("https://jitpack.io")  // MixinExtras, Fabric ASM
   maven("https://maven.jamieswhiteshirt.com/libs-release")  // Reach Entity Attributes
   maven("https://api.modrinth.com/maven")  // LazyDFU
-  maven("https://maven.tterrag.com/")  // Create Forge, Flywheel
+  maven("https://maven.createmod.net")  // Create Forge, Flywheel, Ponder (Catnip)
   maven("https://maven.theillusivec4.top/")  // Curios
   maven("https://thedarkcolour.github.io/KotlinForForge/")
   maven("https://maven.blamejared.com/")  // JEI
@@ -54,7 +54,7 @@ minecraft {
 }
 
 dependencies {
-  minecraft("net.neoforged:forge:${minecraft_version}-${forge_version}")
+  minecraft("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
   implementation("thedarkcolour:kotlinforforge:$forge_kotlin_version")
   implementation(fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim"))
   implementation("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}")
@@ -146,9 +146,9 @@ modrinth {
   token.set(System.getenv("MODRINTH_TOKEN"))
   projectId.set(modrinth_id)
   versionNumber.set("$mod_version")
-  versionName.set("CTM NeoForge $mod_version")
+  versionName.set("CTM Forge $mod_version")
   gameVersions.add(minecraft_version)
-  loaders.add("neoforge")
+  loaders.add("forge")
   dependencies {
     required.project("create")
     required.project("kotlin-for-forge")
